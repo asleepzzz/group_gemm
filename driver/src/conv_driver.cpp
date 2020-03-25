@@ -18,11 +18,11 @@
 //#include "device_convolution_implicit_gemm_v1_nchw_cyxk_nkhw.hpp"
 //#include "device_convolution_implicit_gemm_v2_chwn_cyxk_khwn.hpp"
 //#include "device_convolution_implicit_gemm_v3_nchw_cyxk_nkhw.hpp"
-#include "device_convolution_implicit_gemm_v4r1_nchw_kcyx_nkhw_deprecated.hpp"
-#include "device_convolution_implicit_gemm_v4r1_nchw_kcyx_nkhw.hpp"
+//#include "device_convolution_implicit_gemm_v4r1_nchw_kcyx_nkhw_deprecated.hpp"
+//#include "device_convolution_implicit_gemm_v4r1_nchw_kcyx_nkhw.hpp"
 //#include "device_convolution_implicit_gemm_v4r2_nchw_kcyx_nkhw.hpp"
 //#include "device_convolution_implicit_gemm_v4r3_nchw_kcyx_nkhw.hpp"
-#include "device_convolution_implicit_gemm_v4r4_nchw_kcyx_nkhw_deprecated.hpp"
+//#include "device_convolution_implicit_gemm_v4r4_nchw_kcyx_nkhw_deprecated.hpp"
 #include "device_convolution_implicit_gemm_v4r4_nchw_kcyx_nkhw.hpp"
 
 int main(int argc, char* argv[])
@@ -31,11 +31,11 @@ int main(int argc, char* argv[])
 
 #if 1
     // 1x1
-    constexpr index_t N  = 64;
-    constexpr index_t C  = 64;
-    constexpr index_t HI = 56;
-    constexpr index_t WI = 56;
-    constexpr index_t K  = 256;
+    constexpr index_t N  = 128;
+    constexpr index_t C  = 32;
+    constexpr index_t HI = 1;
+    constexpr index_t WI = 1;
+    constexpr index_t K  = 128;
     constexpr index_t Y  = 1;
     constexpr index_t X  = 1;
 
@@ -389,6 +389,18 @@ int main(int argc, char* argv[])
 #elif 1
         in_nchw.GenerateTensorValue(GeneratorTensor_2{-5, 5}, num_thread);
         wei_kcyx.GenerateTensorValue(GeneratorTensor_2{-5, 5}, num_thread);
+
+for (int i =0;i<in_nchw.mData.size();i++)
+{
+     in_nchw.mData[i]=(int)(i/10)*1.0f;
+}
+for (int i =0;i<wei_kcyx.mData.size();i++)
+{
+     wei_kcyx.mData[i]=(int)(i/10)*1.0f;
+}
+
+
+
 #elif 0
         in_nchw.GenerateTensorValue(GeneratorTensor_2{1, 5}, num_thread);
 

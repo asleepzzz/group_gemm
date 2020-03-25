@@ -53,7 +53,7 @@ void device_convolution_implicit_gemm_v4r4_nchw_kcyx_nkhw(InDesc,
     wei_kcyx_device_buf.ToDevice(wei_kcyx.mData.data());
     out_nkhw_device_buf.ToDevice(out_nkhw.mData.data());
 
-#if 0
+#if 1
     // BlockSize = 256, GemmKPerBlock = 8
     constexpr index_t BlockSize = 256;
 
@@ -147,7 +147,7 @@ void device_convolution_implicit_gemm_v4r4_nchw_kcyx_nkhw(InDesc,
     constexpr index_t GemmBBlockCopyDstDataPerWrite_GemmN = 4;
 
     constexpr index_t GemmCThreadCopyDstDataPerWrite_GemmN1 = 4;
-#elif 1
+#elif 0
     // BlockSize = 256, GemmKPerBlock = 16
     // for 1x1 filter, vector-read-b = 4
     constexpr index_t BlockSize = 256;
@@ -179,7 +179,7 @@ void device_convolution_implicit_gemm_v4r4_nchw_kcyx_nkhw(InDesc,
     constexpr index_t GemmBBlockCopyDstDataPerWrite_GemmN = 4;
 
     constexpr index_t GemmCThreadCopyDstDataPerWrite_GemmN1 = 4;
-#elif 1
+#elif 0
     // 1x1 filter, 14x14 image
     constexpr index_t BlockSize = 256;
 
@@ -237,11 +237,12 @@ void device_convolution_implicit_gemm_v4r4_nchw_kcyx_nkhw(InDesc,
         GemmKPerBlock,
         GemmMPerThreadSubC,
         GemmNPerThreadSubC,
+       
+        GemmKPerThreadLoop,
         GemmMLevel0Cluster,
         GemmNLevel0Cluster,
         GemmMLevel1Cluster,
         GemmNLevel1Cluster,
-        GemmKPerThreadLoop,
         ThreadGemmDataPerReadM,
         ThreadGemmDataPerReadN,
         GemmABlockCopyThreadSliceLengths_GemmK_GemmM,

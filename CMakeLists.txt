@@ -17,20 +17,6 @@ message("Boost_LIBRARY_DIRS: ${Boost_LIBRARY_DIRS}")
 include_directories(BEFORE ${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
-#OpenMP
-if( NOT( ${CMAKE_CXX_COMPILER_ID} STREQUAL "AppleClang") )
-    find_package(OpenMP REQUIRED)
-
-    message("OpenMP_CXX_LIB_NAMES: ${OpenMP_CXX_LIB_NAMES}")
-    message("OpenMP_gomp_LIBRARY: ${OpenMP_gomp_LIBRARY}")
-    message("OpenMP_pthread_LIBRARY: ${OpenMP_pthread_LIBRARY}")
-    message("OpenMP_CXX_FLAGS: ${OpenMP_CXX_FLAGS}")
-
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-    link_libraries(${OpenMP_gomp_LIBRARY})
-    link_libraries(${OpenMP_pthread_LIBRARY})
-endif( NOT( ${CMAKE_CXX_COMPILER_ID} STREQUAL "AppleClang") )
-
 #GPU backend
 if(DEVICE_BACKEND STREQUAL "AMD")
     set(CMAKE_MODULE_PATH "/opt/rocm/hip/cmake" ${CMAKE_MODULE_PATH})

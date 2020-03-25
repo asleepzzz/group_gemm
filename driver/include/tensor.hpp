@@ -292,6 +292,7 @@ void check_error(const Tensor<T>& ref, const Tensor<T>& result)
     float ref_value = 0, result_value = 0;
     for(int i = 0; i < ref.mData.size(); ++i)
     {
+        printf("=========check %f %f===========\n",double(ref.mData[i]),double(result.mData[i]));
         error += std::abs(double(ref.mData[i]) - double(result.mData[i]));
         float diff = std::abs(double(ref.mData[i]) - double(result.mData[i]));
         if(max_diff < diff)

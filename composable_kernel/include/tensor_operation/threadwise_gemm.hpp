@@ -147,7 +147,7 @@ struct ThreadwiseGemmTransANormalBNormalC
     template <typename FloatA, typename FloatB, typename FloatC>
     __device__ static void Run(const FloatA* p_a, const FloatB* p_b, FloatC* p_c)
     {
-#if CK_THREADWISE_GEMM_USE_AMD_INLINE_ASM
+#if 0//CK_THREADWISE_GEMM_USE_AMD_INLINE_ASM
         constexpr bool has_amd_asm = is_same<FloatC, float>{} &&
                                      ((is_same<FloatA, float>{} && is_same<FloatB, float>{}) ||
                                       (is_same<FloatA, half2_t>{} && is_same<FloatB, half2_t>{}) ||
